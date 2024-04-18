@@ -7,17 +7,17 @@ RUN apt update &&\
 	apt install -y nginx\
 	openssl
 
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj "/C=FR/L=Paris/O=42/CN=c.42.fr"
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj "/C=FR/L=Paris/O=42/CN=ccamargo.42.fr"
 
 EXPOSE 443
 
-COPY conf/c /etc/nginx/sites-available/
+COPY conf/ccamargo /etc/nginx/sites-available/
 
-RUN ln -s /etc/nginx/sites-available/c /etc/nginx/sites-enabled/ && \
+RUN ln -s /etc/nginx/sites-available/ccamargo /etc/nginx/sites-enabled/ && \
 	unlink /etc/nginx/sites-enabled/default && \
-	mkdir /var/www/c
+	mkdir /var/www/ccamargo
 
-RUN chmod 755 /var/www/c
-RUN chown -R www-data:www-data /var/www/c
+RUN chmod 755 /var/www/ccamargo
+RUN chown -R www-data:www-data /var/www/ccamargo
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
