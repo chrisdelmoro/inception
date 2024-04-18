@@ -1,0 +1,56 @@
+version: "3"
+
+services:
+  mariadb:
+    container_name: mariadb
+    image: mariadb
+    build: ./requirements/mariadb
+    env_file: .env
+    networks:
+      - inception
+    expose:
+      - "3306"
+    volumes:
+      - mdb_data:/var/lib/mysql
+    restart: always
+  
+  wordpress:
+    container_name: wordpress
+    image: wordpress
+    build: ./requirements/wordpress
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+    expose:
+      - "9000"
+    volumes:
+      - wp_data:/var/www/ccamargo
+    env_file: .env
+    restart: always
+  
+  nginx:
+    container_name: nginx
+    image: nginx
+    build: ./requirements/nginx
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+    ports:
+      - "443:443"
+    volumes:
+      - wp_data:/var/www/ccamargo
+    env_file: .env
+    restart: always
+
+networks:
+  inception:
+    driver: bridge
+
+volumes:
+  wp_data:
+    external: true
+
+  mdb_data:
+    external: true
