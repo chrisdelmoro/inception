@@ -3,7 +3,7 @@
 <!-- PROJECT SHIELDS -->
 <br/>
 <p align="center">
-    <img src="https://github.com/chrisdelmoro/inception/blob/main/resources/repo/inceptionn.png" alt="Logo" width="150" height="150">
+    <img src="https://github.com/chrisdelmoro/inception/blob/main/resources/repo/inceptione.png" alt="Logo" width="150" height="150">
 
   <p align="center">
     A Docker and containerization exercise.
